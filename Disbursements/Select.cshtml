@@ -1,0 +1,65 @@
+﻿@using LogicUniversity.Models
+@model Retrieval
+@{
+    ViewBag.Title = "Select";
+    var rList = (List<Retrieval>)ViewData["rList"];
+    var dList = (List<Department>)ViewData["dList"];
+    var rListCount = (int)ViewData["rListCount"];
+    var dListCount = (int)ViewData["dListCount"];
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+<h2>Display Disbursement</h2>
+
+@using (Html.BeginForm("Select", "Disbursements"))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="dListCount" id="dListCount" value=@dListCount />
+    <input type="hidden" name="rListCount" id="rListCount" value=@rListCount />
+    <table align="center">
+        <thead>
+        <td>RETRIEVAL ID</td></thead>
+        @{
+            //To make unique Id
+            int i = 0;
+            foreach (var item in rList)
+            {
+                <tr>
+                    <td align="right">
+                        <input type="radio" name="Retrieval[@i]" id="Retrieval[@i]" value=@Html.DisplayFor(model => item.RetrievalId) />
+                    </td>
+                    <td align="left">
+                        @Html.DisplayFor(model => item.RetrievalId)
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+    </table>
+    <table align="center">
+        @{
+            //To make unique Id
+            int j = 0;
+            foreach (var item in dList)
+            {
+                <tr>
+                    <td align="right">
+                        <input type="checkbox" name="Department[@j]" id="Department[@j]" value=@Html.DisplayFor(model => item.DeptName) />
+                    </td>
+                    <td align="left">
+                         @Html.DisplayFor(model => item.DeptName)
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+    </table>
+    <input type="submit" id="submit" name="submit" class="btn btn-primary" role="button"/>
+}

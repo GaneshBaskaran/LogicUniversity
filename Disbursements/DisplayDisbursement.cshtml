@@ -1,0 +1,53 @@
+﻿@using LogicUniversity.Models
+@model ItemCodeDisbursement
+@{
+    ViewBag.Title = "DisplayDisbursement";
+    var ICDList = (List<ItemCodeDisbursement>)ViewData["ICDList"];
+    var count = (int)ViewData["count"];
+    var DeptString = (string)ViewData["DeptString"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+<h2>DisplayDisbursement</h2>
+@using (Html.BeginForm("DisplayDisbursement", "Disbursements"))
+
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" value="@count" name="count" id="count" />
+    <input type="hidden" value="@DeptString" name="DeptString" id="DeptString" />
+    <table>
+        <thead>
+        <td>Catalogue Item Code</td>
+        <td>Product Description</td>
+        <td>Quantity</td>
+        <td>Collected</td></thead>
+
+        @{
+            //To make unique Id
+            int i = 0;
+            foreach (var item in ICDList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.Product.ItemCode)
+                        <input type="hidden" name="Disbursement[@i].itemcode" id="Disbursement[@i].itemcode" value=@Html.DisplayFor(model => item.Product.ItemCode) />
+                    </td>
+
+                    <td>@Html.DisplayFor(model => item.Product.Description)</td>
+
+                    <td>
+                        @Html.DisplayFor(model => item.Quantity)
+                        <input type="hidden" name="Disbursement[@i].quantity" id="Disbursement[@i].quantity" value=@Html.DisplayFor(model => item.Quantity) />
+                    </td>
+                    <td>
+                        <input type="number" name="Disbursement[@i].collected" id="Disbursement[@i].collected" />
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+    </table>
+    <input type="submit" id="submit" name="submit" />
+}
+

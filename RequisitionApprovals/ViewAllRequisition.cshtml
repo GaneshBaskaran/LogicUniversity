@@ -1,0 +1,81 @@
+﻿@model IEnumerable<LogicUniversity.Models.Requisition>
+
+@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+
+<h2>Track Requisition</h2>
+
+<form> 
+    <table>
+        <tr>            
+            <td>Requisition Id: </td>
+            <td><input type="text" name="reqid" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>From date: </td>
+            <td><input type="datetime" name="fromdate" id="fromdate" class="form-control" /></td>
+            <td>To date: </td>
+            <td><input type="datetime" name="todate" id="todate" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>Status: </td>
+            <td><input type="datetime" name="status" id="status" class="form-control" /></td>           
+            <td></td>           
+        </tr>
+        <tr>           
+            <td><input type="submit" value="Filter" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequisitionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequisitionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "TrackDetails", new { id = item.RequisitionId })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,48 @@
+﻿@model LogicUniversity.Models.CollectionPoint
+@{
+    Layout = "~/Views/Shared/_Layout_SM.cshtml";
+}
+<h2>Details</h2>
+
+<div>
+    <h4>CollectionPoint</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.EmployeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Day)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Day)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditCollectionPointDetails", new { id = Model.CollectionPointId }) |
+    @Html.ActionLink("Back to List", "ViewCollectionPoint")
+</p>

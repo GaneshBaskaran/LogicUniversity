@@ -1,0 +1,86 @@
+﻿@model LogicUniversity.Models.StockAdjustmentVoucher
+@using LogicUniversity.Models
+@{
+    var v0 = (StockAdjustmentVoucher)ViewData["s"];
+    var count = (int)ViewData["count"];
+    var RetrievalId = (int)ViewData["RetrievalId"];
+    var DeptString = (string)ViewData["DeptString"];
+}
+
+
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+
+<h1 align="center">Stock Adjustment Voucher</h1>
+<p style="text-align:left;">
+    Voucher: @v0.Id<br />
+    Name: Sally Lim (hardcoded)
+    <span style="float:right;">
+        Date Issued:@v0.DateCreated
+    </span>
+</p>
+@*
+    <table span=100% align="center">
+        <tr><th>Voucher: @v0.Id</th><th>Date Issued: @v0.DateCreated</th></tr>
+        <tr><th>Sally Lim (This is hard Coded first)</th></tr>
+    </table>
+*@
+
+@using (Html.BeginForm("AdjustRetrieval", "Retrievals"))
+
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" value="@count" name="count" />
+    <input type="hidden" value="@RetrievalId" name="RetrievalId" />
+    <input type="hidden" value="@DeptString" name="DeptString" />
+    <div class="form-group" align="center">
+        <table>
+            <tr>
+                <th>Item Code</th>
+                <th>Quantity Adjusted</th>
+                <th>Reason</th>
+            </tr>
+            @{
+                //To make unique Id
+                int i = 0;
+                foreach (var item in Model.StockAdjustmentVoucherDetails.ToList())
+                {
+
+                    <tr>
+                        <td>
+                            @item.ItemCode
+                            <input type="hidden" value="@item.ItemCode" name="ItemCode[@i]">
+                        </td>
+                        <td>
+                            @item.QuantityAdjusted
+                            <input type="hidden" value="@item.QuantityAdjusted" name="QuantityAdjusted[@i]">
+                        </td>
+                        <td>
+                            @Html.EditorFor(o => o.StockAdjustmentVoucherDetails[i].Reason, new { @id = "Reason" + @i })
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+
+
+            @*<tr>
+                    <td colspan="2" align="right"><input type="submit" value="Create" /></td>
+                </tr>*@
+        </table>
+    </div>
+    <div class="form-group">
+        <input type="hidden" value="@v0.DateCreated" name="DateCreated" id="DateCreated" />
+        <input type="hidden" value="@v0.Id" name="Id" id="Id" />
+    </div>
+
+    <div class="form-group" style="float:right;">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />Submit and Proceed to Disbursement
+        </div>
+    </div>
+    <div>
+        <button align="left" onclick="window.location.href = '/';"> Back </button>
+    </div>
+}

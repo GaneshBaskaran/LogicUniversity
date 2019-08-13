@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Store Clerk Dashboard";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">    
+</head>
+
+<h2>Storeclerk Dashboard</h2>
+
+<table align="center">
+    <tr>
+        <td><a href="@Url.Action("SCRequisitionView","RequisitionApprovals")" class="btn btn-lg btn-primary btn-block" role="button">Requistion</a></td>
+        <td><a href="@Url.Action("Select","Disbursements")" class="btn btn-lg btn-primary btn-block" role="button">Disbursements</a></td>
+        <td><a href="@Url.Action("Index","Products")" class="btn btn-lg btn-primary btn-block" role="button">Catalogue</a></td>
+
+        @*<td>@Html.ActionLink("Requisition", "SCRequisitionView", "RequisitionApprovals")</td>
+        <td>@Html.ActionLink("Disbursements", "Select", "Disbursements")</td>
+        <td>@Html.ActionLink("Catalogue", "Index", "Products")</td>*@
+    </tr>
+    <tr>
+        <td><a href="@Url.Action("PlaceOrder","PurchaseOrder")" class="btn btn-lg btn-primary btn-block" role="button">Purchase order</a></td>
+        <td><a href="@Url.Action("Create","StockAdjustmentVouchers")" class="btn btn-lg btn-primary btn-block" role="button">Adjustment voucher</a></td>
+        <td><a href="@Url.Action("Index","stockcards")" class="btn btn-lg btn-primary btn-block" role="button">Stock cards</a></td>
+
+        
+        @*<td>@Html.ActionLink("Purchase Order", "PlaceOrder", "PurchaseOrder")</td>
+        <td>@Html.ActionLink("Adjustment Voucher", "Create", "StockAdjustmentVouchers")</td>
+        <td>@Html.ActionLink("Stock Cards", "Index", "stockcards")</td>*@
+    </tr>
+    <tr>
+        <td><a href="@Url.Action("ViewAllRequisition","RequisitionApprovals")" class="btn btn-lg btn-primary btn-block" role="button">Requisitions history</a></td>
+        <td><a href="@Url.Action("Index","Suppliers")" class="btn btn-lg btn-primary btn-block" role="button">Supplier list</a></td>
+        <td><a href="@Url.Action("View Tender","Tender")" class="btn btn-lg btn-primary btn-block" role="button">View tender</a></td>
+
+        
+        @*<td>@Html.ActionLink("Requisitions History", "ViewAllRequisition", "RequisitionApprovals")</td>
+        <td>@Html.ActionLink("Supplier List", "Index", "Suppliers")</td>
+        <td>@Html.ActionLink("View Tender", "Tender")</td>*@
+    </tr>
+    <tr>
+        <td><a href="@Url.Action("ChargeBackDepartment","ChargeBackDepartment")" class="btn btn-lg btn-primary btn-block" role="button">Charge department</a></td>
+        <td><a href="@Url.Action("View Department","Department")" class="btn btn-lg btn-primary btn-block" role="button">View department</a></td>
+
+
+        @*<td>@Html.ActionLink("Charge Department", "ChargeBackDepartment", "ChargeBackDepartment")</td>
+        <td>@Html.ActionLink("View Department", "Department")</td>*@
+        <td></td>
+    </tr>
+</table>

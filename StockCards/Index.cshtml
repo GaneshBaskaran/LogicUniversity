@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LogicUniversity.Models.StockCard>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.ItemCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BinNo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.product.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product.ItemCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product.Balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BinNo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemCode }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemCode }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemCode })
+            </td>
+        </tr>
+    }
+
+</table>

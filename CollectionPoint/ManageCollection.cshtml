@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+
+<h2>Manage Collection</h2>
+
+<html>
+<head>    
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css"> 
+    <meta name="viewport" content="width=device-width" />
+    @*<title>Index</title>*@
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    <script type="text/javascript" src="@Url.Action("~/scripts/jquery-3.3.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Action("~/scripts/bootstrap.min.js")"></script>
+    <script>
+        function updatecp()
+        {
+            window.location.href = '@Url.Action("UpdateCollectionPoint", "CollectionPoint")'
+        }
+        function updateur()
+        {
+            //var id = model.Id; //if you want to pass an Id parameter
+           // window.location.href = '@Url.Action("UpdateCollectionPoint", "CollectionPoint")/' + id;
+            window.location.href = '@Url.Action("UpdateRepresentative", "CollectionPoint")'
+        }
+    </script>
+</head>
+
+<body>
+    @*<div class="container-fluid py-4">
+        <h4 class="text-center text-uppercase">manage collection</h4>
+    </div>*@
+    <div class="container">
+
+        <form>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" onclick="updatecp()">Update Collection Point
+            </label>
+            <p></p>
+            <p></p>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" onclick="updateur()">Update Representative
+            </label>
+        </form>
+    </div>
+
+</body>
+</html>
+
+

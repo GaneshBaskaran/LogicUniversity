@@ -1,0 +1,65 @@
+﻿@model IEnumerable<LogicUniversity.Models.Employee>
+@{
+    ViewBag.Title = "UpdateRepresentative";
+    var deptId = (int)ViewData["deptid"];
+    var currentRepresentative = (string)ViewData["representative"];
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+
+<h2>Update Representative</h2>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+    <script>
+        function back() {
+           window.location.href = '@Url.Action("ManageCollection", "CollectionPoint")'
+        }
+    </script>
+</head>
+
+<body>
+    @*<p></p>
+    <p></p>
+    <div class="container-fluid py-4">
+        <h4 class="text-center text-uppercase">Update Representative</h4>
+        <p></p>
+    </div>
+    <br />*@
+    @*<div class=" text-none" style="margin-top:50px;margin-bottom:30px">
+        @Html.Label("Current Representative:   ")
+        <b>@currentRepresentative</b>
+    </div>*@
+    <div>
+        @Html.Label("Current Representative:   ")<t></t>
+        <b>@currentRepresentative</b>
+    </div>
+    <p></p>
+    <p></p>
+
+    @using (Html.BeginForm("SaveChangedDepartmentrepresentative", "CollectionPoint", FormMethod.Post, new { id = "TheForm" }))
+    {
+        <div class="form-group" align="center">
+            @Html.Label("New Representatives", htmlAttributes: new { @class = "control-label col-md-2" })
+            <p></p>
+            <p></p>
+            <div class="col-md-10" align="center">
+                @Html.DropDownList("EmployeeId")
+                @*<br /><br />*@
+                <p></p>
+                <p></p>
+            </div>
+            <div>
+                @*<div style="float:left;margin-left:200px"><input type="button" name="Back" value="Back" onclick="back()" /></div>*@
+                @*<input type="submit" value="Update" name="update" style="float:right;margin-right:200px" />*@
+                <input type="submit" value="Update" name="update" align="right" class="btn btn-primary"/>
+            </div>
+        </div>
+        <br />
+    }
+</body>
+</html>

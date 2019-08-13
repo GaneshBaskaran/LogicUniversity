@@ -1,0 +1,44 @@
+﻿
+
+@{
+    ViewBag.Title = "Department Head Dashboard";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+<head>
+    @*<link rel="stylesheet" type="text/css" href="~/css/newst.css">*@
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+<h2>HOD Dashboard</h2>
+
+<table align="center">
+    <tr>
+        <td>
+            <a href="@Url.Action("ViewRequisition","RequisitionApprovals")" class="btn btn-lg btn-primary btn-block" role="button">Requistion Approvals</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="@Url.Action("ViewAllRequisition","RequisitionApprovals")" class="btn btn-lg btn-primary btn-block" role="button">View all Requistion </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <a href="@Url.Action("ManageCollection","CollectionPoint")" class="btn btn-lg btn-primary btn-block" role="button">Manage Collection</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <a href="@Url.Action("ManageDelegation","Delegations")" class="btn btn-lg btn-primary btn-block" role="button">Manage Delegation </a>
+        </td>
+    </tr>
+</table>
+
+@*<a href="@Url.Action("ViewRequisition","RequisitionApprovals")" class="button">Requistion Approvals</a>
+<a href="@Url.Action("ViewAllRequisition","RequisitionApprovals")" class="button">View all Requistion </a>
+<a href="@Url.Action("ManageCollection","CollectionPoint")" class="button">Manage Collection</a>
+<a href="@Url.Action("ManageDelegation","Delegations")" class="button">Manage Delegation </a>*@
+

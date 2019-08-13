@@ -1,0 +1,74 @@
+﻿@model List<LogicUniversity.Models.CollectionPoint>
+
+@{
+    var Collectionpoint = (string)ViewData["currentCollectionPoint"];
+    int deptid = (int)ViewData["deptid"];
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+
+<h2>Update Collection Point</h2>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+    <script>
+        function back1()
+        {
+            var e = document.getElementsByName('collectionpoint');
+            var etochange = document.getElementById('selection');
+            for (var i = 0; i < e.length; i++)
+            {
+                if (e[i].checked) {
+                    etochange = e[i].value;
+                }
+            }
+            document.getElementById('selection').value = etochange;
+        }
+        function back()
+        {
+           window.location.href = '@Url.Action("ManageCollection", "CollectionPoint")'
+        }
+    </script>
+</head>
+<body>
+    @*<p></p>
+        <p></p>*@
+    @*<div class="container-fluid py-4">
+            <h4 class="text-center text-uppercase">Update Collection Point</h4>
+            <p></p>
+        </div>*@
+    @*<br />*@
+    <div>
+        @Html.Label("Current Collection Point:   ")<t></t>
+        <b>@Collectionpoint</b>
+    </div>
+    @*<br />*@
+    @using (Html.BeginForm("SaveChangedCollectionPoint", "CollectionPoint", FormMethod.Post))
+    {
+        <table align="center">
+            @foreach (var point in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="radio" name="collectionpoint" id=@point.CollectionPointId value=@point.CollectionPointId onclick="back1()" />@Html.Label(point.LocationName, new { @for = point.CollectionPointId })
+                    </td>
+                    @*<td>
+                            @Html.Label(point.LocationName, new { @for = point.CollectionPointId })
+                        </td>*@
+                </tr>
+            }
+        </table>
+        @*<br />*@
+        <div align="right"><input type="submit" name="Update" value="Update" class="btn btn-primary"/></div>
+        @*<div style="float:right;margin-right:200px"><input type="submit" name="Update" value="Update" /></div>*@
+        @*<div style="float:left;margin-left:200px"><input type="button" name="Back" value="Back" onclick="back()" /></div>*@
+        <input type="hidden" id="deptid" name="deptid" value=@deptid />
+        <input type="hidden" id="selection" name="selection" />
+    }
+</body>
+</html>
+
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<LogicUniversity.Models.CartItem>
+@{
+    ViewBag.Title = "Addtocart";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_DS.cshtml";
+}
+
+<br />
+<br />
+<br />
+@using (@Html.BeginForm())
+{
+
+<div class="container">
+
+    <table class="table">
+        <tr>
+            <th> Category</th>
+            <th> Description </th>
+            <th> UOM </th>
+            <th> Quantity </th>
+            <th> Action </th>
+        </tr>
+        @foreach (var item in Model)
+
+        {
+
+            <tr>
+
+                <input type="hidden" value="@item.ItemCode" name="ItemCode" />
+                <td><input type="hidden" value="@item.Category" name="Category" />@item.Category</td>
+                <td><input type="hidden" value="@item.Description" name="Description" />@item.Description</td>
+                <td><input type="hidden" value="@item.UOM" name="UOM" /></td>
+                <td><input type="number" name="Quantity" value="0" /></td>
+                <td><input type="reset" name="Quantity" value="Reset" id="Quantity" /></td>
+                <td> @Html.ActionLink("Delete", "AddtoCart", new { id = item.ItemCode })</td>
+            </tr>
+        }
+    </table>
+
+    @if (Model.Count() > 0)
+    {
+        <input type="submit" value="Submit" class="btn btn-default" />
+    }
+
+
+</div>
+
+
+
+
+
+}

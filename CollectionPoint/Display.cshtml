@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Display";
+    var collectionpoint = (string)ViewData["cp"];
+    var representative = (string)ViewData["rep"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+<h2>Collection Point Details</h2>
+
+<body>
+    <p>
+        Current Representative: @representative
+    </p>
+    <p></p>
+    <p>
+        Current Collection point: @collectionpoint
+    </p>
+</body>
+
+@*<div class="container-fluid py-4">
+    <h4 class="text-center text-none">Current Representative: @representative</h4>
+    <h4 class="text-center text-none">Current Collection point: @collectionpoint</h4>
+</div>*@

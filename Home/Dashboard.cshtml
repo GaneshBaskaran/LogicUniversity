@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Employee Dashboard";
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<h2>Dashboard</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                <a href="@Url.Action("Index","Products")" class="btn btn-sq-lg btn-primary">
+                    <i class="fa fa-user fa-100x"></i><br />
+                    View Products <br><br>
+
+                </a>
+                <a href="@Url.Action("Index","Requisition")" class="btn btn-sq-lg btn-primary">
+                    <i class="fa fa-user fa-100x"></i><br />
+                    Make Requistion <br><br>
+                </a>
+                <a href="#" class="btn btn-sq-lg btn-primary">
+                    <i class="fa fa-user fa-100x"></i><br />
+                    Track Requisition <br><br>
+                </a>
+                <a href="#" class="btn btn-sq-lg btn-primary">
+                    <i class="fa fa-user fa-100x"></i><br />
+                    Dummy Button <br> <br>
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+

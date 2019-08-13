@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+
+<h2>Manage Delegation</h2>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+    <meta name="viewport" content="width=device-width" />
+    @*<title>Index</title>*@
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    <script type="text/javascript" src="@Url.Action("~/scripts/jquery-3.3.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Action("~/scripts/bootstrap.min.js")"></script>
+    <script>
+        function updatecp()
+        {
+            window.location.href = '@Url.Action("AppointDelegation", "Delegations")'
+        }
+        function updateur()
+        {
+            window.location.href = '@Url.Action("ViewDelegation", "Delegations")'
+        }
+    </script>
+</head>
+<body>
+    @*<div class="container-fluid py-4">
+        <h4 class="text-center text-uppercase">manage delegation</h4>
+    </div>*@
+    <div class="container">
+        <form>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" onclick="updatecp()">Appoint Delegation
+            </label>
+            <p></p>
+            <p></p>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" onclick="updateur()">View Delegation
+            </label>
+        </form>
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,34 @@
+﻿@model LogicUniversity.Models.Retrieval
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Retrieval</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreClerk.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreClerk.EmployeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateRetrieved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateRetrieved)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RetrievalId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

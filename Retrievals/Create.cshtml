@@ -1,0 +1,99 @@
+﻿@using LogicUniversity.Models
+@model LogicUniversity.Models.ItemCodeRequisition
+
+
+@{
+    ViewBag.Title = "Create";
+    var ICRList = (List<ItemCodeRequisition>)ViewData["ICRList"];
+    var count = (int)ViewData["count"];
+    var dept = (string)"";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "Retrievals", FormMethod.Post))
+{
+    <input type="hidden" value="@count" name="count" id="count" />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <table border="1">
+            <tr>
+                <th>Product</th>
+                <th>Retrieved</th>
+                <th>Qty In Inventory</th>
+                <th>Total Needed</th>
+                <th>Dept Name</th>
+                <th>Needed</th>
+            </tr>
+            @{
+                //To make unique Id
+                int i = 0;
+                foreach (var item in ICRList)
+                {
+
+                    <tr>
+                        <td>
+                            @item.Product.Description
+                            <input type="hidden" name="ICR[@i].product" value="@item.Product.Description" />
+                        </td>
+                        <td>
+                            <input type="number" name="ICR[@i].retrieved" />
+                        </td>
+                        <td>
+                            @item.QtyInInventory
+                            <input type="hidden" name="ICR[@i].qtyininventory" value="@item.QtyInInventory" />
+                        </td>
+                        <td>
+                            @item.TotalNeeded
+                            <input type="hidden" name="ICR[@i].TotalNeeded" value="@item.TotalNeeded" />
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    @foreach (Department j in item.DeptName)
+                                    {
+                                        int k = 0;
+                                    <tr>@j.DeptName</tr>
+                                    <br />
+                                        var deptname = j.DeptName;
+                                        dept = dept + "*" + deptname;
+
+                                        k++;
+                                    }
+                                    <input type="hidden" name="ICR[@i].Dept" value="@dept" />
+                                    @{dept = "";}
+                    </tr>
+                    </table>
+                    </td>
+                    <td>
+                        <table>
+                            @foreach (double k in item.NeededList)
+                            {
+                                <tr>@k</tr>
+                                <br />
+                            }
+                        </table>
+                    </td>
+                    </tr>
+                    i++;
+                }
+            }
+
+
+            @*<tr>
+                <td colspan="2" align="right"><input type="submit" value="Create" /></td>
+            </tr>*@
+            </table>
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+}
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

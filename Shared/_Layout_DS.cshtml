@@ -1,0 +1,79 @@
+﻿@{
+    string sessionId = (string)ViewData["sessionId"];
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+        body {
+            margin: -55px auto;
+        }
+        .btn {
+            background: none;
+            color: #0784bf;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+            <label>
+                <i class="fas fa-home"></i>
+                <button class="btn" onclick="window.location.href = '/Login/StaffDashboard?sessionId=@sessionId';">Go to Dashboard</button>
+                <button class="btn" onclick="window.location.href = '/Products/Index';">Go to Product Catalogue</button>
+
+
+                @*@Html.ActionLink("Dashboard", "StaffDashboard", "Login", new { sessionId = @sessionId })|  @Html.ActionLink("Product Catalogue", "Index", "Products") | @Html.ActionLink("Store Feedback", "StaffDashboard")*@
+            </label> <label style="float: right;">
+    <button class="btn" onclick="window.location.href = '/Login/Logout?sessionId=@sessionId';">Log out</button>
+    @*@Html.ActionLink("Logout", "Logout", "Login")*@
+</label>
+        </div>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@model LogicUniversity.Models.StockCard
+@using LogicUniversity.Models
+
+@{
+    ViewBag.Title = "Details";
+    var p0 = (Products)ViewData["product"];
+    var adjustmentvoucherlist = (List<StockAdjustmentVoucherDetail>)ViewData["stockadjustmentvoucherlist"];
+    var stockcardlist = (List<StockCard>)ViewData["stockcardlist"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+<h2>Details</h2>
+@*Head Section on displaying the product details*@
+<div>
+    <table name="section1" frame="box">
+        <tr><td>@Html.DisplayNameFor(model => model.product.ItemCode)</td><td>@p0.ItemCode</td></tr>
+        <tr><td>@Html.DisplayNameFor(model => model.product.Description)</td><td>@p0.Description</td></tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.BinNo)</td>
+            <td>
+                @*Bin goes here*@
+                @foreach (StockCard stockcard in stockcardlist)
+                {
+                    @stockcard.BinNo <br />
+                }
+            </td>
+        </tr>
+        <tr><td>@Html.DisplayNameFor(model => model.product.UOM)</td><td>@p0.UOM</td></tr>
+        <tr><td>@Html.DisplayNameFor(model => model.product.Supplier1)</td><td>@p0.Supplier1</td></tr>
+        <tr><td>@Html.DisplayNameFor(model => model.product.Supplier2)</td><td>@p0.Supplier2</td></tr>
+        <tr><td>@Html.DisplayNameFor(model => model.product.Supplier3)</td><td>@p0.Supplier3</td></tr>
+    </table>
+</div>
+<br />
+<div>
+    <table name="section2" border="1">
+        <tr><th>Date</th><th>Dept/Supplier</th><th>Quantity Adjusted</th><th>Balance</th></tr>
+        @foreach (StockAdjustmentVoucherDetail voucher in adjustmentvoucherlist)
+        {
+            <tr><td>@voucher.StockAdjustmentVoucher.DateCreated</td> <td> @voucher.Reason</td><td>@voucher.QuantityAdjusted</td><td>@voucher.Balance</td></tr>
+        }
+    </table>
+</div>

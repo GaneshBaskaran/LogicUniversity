@@ -1,0 +1,45 @@
+﻿@{
+    string sessionId = (string)ViewData["sessionId"];
+}<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <header>
+        <div class="topnav">
+            @*    @Html.Action("Index", "SM")*@
+            <label>
+                <button class="btn" onclick="window.location.href = '/Login/SMDashboard?sessionId=@sessionId';">Go to Dashboard</button>
+                <button class="btn" onclick="window.location.href = '/Products/Index';">Go to Product Catalogue</button>
+            </label> 
+            <label style="float: right;">
+                <button class="btn" onclick="window.location.href = '/Login/Logout?sessionId=@sessionId';">Log out</button>
+            </label>
+        </div>
+    </header>
+    @if (TempData["sessionId"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            @TempData["sessionId"]
+        </div>
+    }
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

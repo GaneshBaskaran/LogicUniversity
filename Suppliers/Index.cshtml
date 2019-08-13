@@ -1,0 +1,83 @@
+﻿@model LogicUniversity.Models.Supplier
+@using LogicUniversity.Models
+@{
+    ViewBag.Title = "Supplier List";
+    var SupplierList = (List<Supplier>)ViewData["SupplierList"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+<h2>Supplier List</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <form action="Post">
+            <p align="left">
+                <input type="submit" name="Create" value="Create" class="btn btn-primary" role="button" />
+                <input type="submit" name="Edit" value="Edit" class="btn btn-primary" role="button" />
+                <input type="submit" name="Delete" value="Delete" class="btn btn-primary" role="button" />
+                @Html.TextBox("SearchString")
+                <input type="submit" name="Search" value="Search by supplier ID" class="btn btn-primary" role="button" />
+            </p>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <table>
+                    @foreach (Supplier supplier in SupplierList)
+                    {
+                        <tr>
+                            <td> @Html.RadioButtonFor(model => model.SupplierId, supplier.SupplierId)</td>
+                            <td>@Html.LabelFor(model => model.SupplierId, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                            <td>
+                                @supplier.SupplierId
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.LabelFor(Supplier => Supplier.GSTRegistrationNo, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                            <td>@supplier.GSTRegistrationNo</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.LabelFor(Supplier => Supplier.SupplierName, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                            <td>@supplier.SupplierName</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.LabelFor(Supplier => Supplier.ContactName, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                            <td>@supplier.ContactName</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.LabelFor(Supplier => Supplier.Phone, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                            <td>@supplier.Phone</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.LabelFor(Supplier => Supplier.Fax, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                            <td>@supplier.Fax</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.LabelFor(Supplier => Supplier.Address, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                            <td>@supplier.Address</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </form>
+    </div>
+
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

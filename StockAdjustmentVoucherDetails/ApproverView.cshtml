@@ -1,0 +1,81 @@
+﻿@model IEnumerable<LogicUniversity.Models.StockAdjustmentVoucherDetail>
+@using LogicUniversity.Models
+
+@{
+    ViewBag.Title = "ListForApproval";
+    var PendingItemList = (List<Products>)ViewData["PendingItemList"];
+    var StatusList = (List<string>)ViewData["StatusList"];
+    var Datetimelist = (List<DateTime>)ViewData["Datetimelist"];
+    var Role = (String)ViewData["Role"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SM.cshtml";
+}
+
+
+<h2 align="left">Stock Adjustment Voucher</h2>
+
+
+@using (Html.BeginForm("ApproverView", "StockAdjustmentVoucherDetails", FormMethod.Get))
+{
+    <input type="hidden" name="Role" value="@Role" />
+    @Html.TextBox("SearchString")
+    <button type="submit">Search Request</button>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <table>
+            <tr>
+                <th>Item Code</th>
+                <th>Description</th>
+                <th>Submit Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            @{
+                //To make unique Id
+                int i = 0;
+                foreach (var item in PendingItemList)
+                {
+
+                    <tr>
+                        <td>
+                            @PendingItemList[i].ItemCode
+                        </td>
+                        <td>
+                            @PendingItemList[i].Description
+                        </td>
+                        <td>
+                            @Datetimelist[i].ToString()
+                        </td>
+                        <td>
+                            @StatusList[i]
+                        </td>
+                        <td>
+                            @if (StatusList[i] == "Pending")
+                            {
+                                @Html.ActionLink("Approve/Reject", "ApprovalAction", new { ItemCode = @PendingItemList[i].ItemCode, Role = @Role })
+                            }
+                            else
+                            {
+                                <text>NA</text>
+                            }
+
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+
+        </table>
+    </div>
+
+}
+

@@ -1,0 +1,88 @@
+﻿@model LogicUniversity.Models.StockAdjustmentVoucherDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>StockAdjustmentVoucherDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockAdjustmentVoucher.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockAdjustmentVoucher.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityAdjusted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityAdjusted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApproverRemarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApproverRemarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Approver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approver)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

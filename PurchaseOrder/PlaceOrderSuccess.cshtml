@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "PlaceOrderSuccess";
+}
+
+<h2>PlaceOrderSuccess</h2>
+
+@using LogicUniversity.Models
+@using LogicUniversity.Controllers
+
+@{
+    List<ReorderResult> products = (List<ReorderResult>)ViewData["Products"];
+}
+<table border="1">
+    <tr>
+        <th>Descripton</th>
+        <th>UOM</th>
+        <th>ReorderQty</th>
+    </tr>
+    @foreach (ReorderResult product in products)
+    {
+        <tr>
+            <td width="100" align="center">@product.Description </td>
+            <td width="100" align="center">@product.UOM </td>
+            <td width="100" align="center">@product.ReorderQty</td>
+        </tr>
+    }
+</table>
+
+@{
+    var datetime = ViewData["date"];
+}
+<p>@datetime</p>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<LogicUniversity.Models.Requisition>
+
+@{
+    Layout = "~/Views/Shared/_Layout_DS.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Track Requisition</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequisitionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequisitionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "TrackDetails", new { id = item.RequisitionId })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LogicUniversity.Models.RequisitionDetails>
+
+@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<form >
+    <div>
+        <h4>Requisition Details</h4>  @Html.ActionLink("Back to List", "ViewRequisition", "RequisitionApprovals")
+        <hr />
+        <table class="table">
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.RequisitionId)</td>
+                <td>@Html.DisplayNameFor(model => model.Products.Description)</td>
+                <td>@Html.DisplayNameFor(model => model.Quantity)</td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td value="id"> @item.RequisitionId</td>
+                    <td>@item.Products.Description</td>
+                    <td> @item.Quantity</td>
+                </tr>
+
+            }
+
+
+        </table>
+    </div>
+
+
+
+
+<textarea rows="4" cols="100" value="Remarks"></textarea>
+    <br />   <br /> <br />
+
+    <input type="submit" value="APPROVED" name="status" id="accept"  class="btn btn-primary" />
+
+    <input type="submit" value="REJECTED" name="status" id="reject"  class="btn btn-primary" />
+
+</form>
+@*<script>
+    function myFunction() {
+        document.getElementById("accept").disabled = true;
+        document.getElementById("reject").disabled = true;
+    }
+</script>*@

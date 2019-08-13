@@ -1,0 +1,58 @@
+﻿@model LogicUniversity.Models.Disbursement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Disbursement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectionPoint.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionPoint.LocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Representative.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Representative.EmployeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateDisbursed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateDisbursed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DisbursementId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

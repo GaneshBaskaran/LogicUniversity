@@ -1,0 +1,91 @@
+﻿@model LogicUniversity.Models.StockAdjustmentVoucher
+@using LogicUniversity.Models
+@{
+    ViewBag.Title = "Place Order";
+    var v0 = (StockAdjustmentVoucher)ViewData["StockAdjustmentVoucher_Default"];
+    var ProductList = (List<Products>)ViewData["ProductList"];
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+
+@*<h1 align="center">Stock Adjustment Voucher</h1>*@
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+
+<h2>Stock Adjustment Voucher</h2>
+
+<p style="text-align:left;">
+    Voucher: @v0.Id<br />
+    Name: Sally Lim (hardcoded)
+    <span style="float:right;">
+        Date Issued:@v0.DateCreated
+    </span>
+</p>
+@*
+    <table span=100% align="center">
+        <tr><th>Voucher: @v0.Id</th><th>Date Issued: @v0.DateCreated</th></tr>
+        <tr><th>Sally Lim (This is hard Coded first)</th></tr>
+    </table>
+*@
+
+@using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    <div class="form-group" align="center">
+        <table>
+            <tr>
+                <th>Item Code</th>
+                <th>Quantity Adjusted</th>
+                <th>Reason</th>
+            </tr>
+            @{
+                //To make unique Id
+                int i = 0;
+                foreach (var item in Model.StockAdjustmentVoucherDetails.ToList())
+                {
+                    <tr>
+                        <td>
+                            <select name="StockAdjustmentVoucherDetails[@i].ItemCode">
+                                @foreach (Products product in ProductList)
+                                {
+                                    <option Id="StockAdjustmentVoucherDetails[@i].ItemCode" name="StockAdjustmentVoucherDetails[@i].ItemCode" typeof="text">
+                                        @product.ItemCode
+                                    </option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" name="StockAdjustmentVoucherDetails[@i].QuantityAdjusted" id="StockAdjustmentVoucherDetails[@i].QuantityAdjusted" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(o => o.StockAdjustmentVoucherDetails[i].Reason, new { @id = "Reason" + i })
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+            
+            @*<tr>
+                    <td colspan="2" align="right"><input type="submit" value="Create" /></td>
+                </tr>*@
+        </table>
+    </div>
+    <div class="form-group">
+        <input type="hidden" value="@v0.DateCreated" name="DateCreated" id="DateCreated" />
+        <input type="hidden" value="@v0.Id" name="Id" id="Id" />
+    </div>
+
+    <div class="form-group" style="float:right;">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-primary" role="button"/>
+        </div>
+    </div>
+    <div>
+        <button align="left" onclick="window.location.href = '/';" class="btn btn-primary" role="button"> Back </button>
+    </div>
+}

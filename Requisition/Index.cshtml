@@ -1,0 +1,115 @@
+﻿@using LogicUniversity.Models;
+
+@model IEnumerable<LogicUniversity.Models.Products>
+@{
+    Layout = "~/Views/Shared/_Layout_DS.cshtml";
+}
+
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+
+    <link href="~/Content/css/themes/base/jquery.ui.all.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-1.4.2.js"></script>
+    <script src="~/Content/js/jquery-ui-1.8.2.custom.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#productName').autocomplete({
+                source: '@Url.Action("Search", "Requisition")'
+            });
+        });
+    </script>
+    <style>
+        #tabledropdown {
+            max-height: 470px;
+            overflow: auto;
+            overflow-y: scroll;
+        }     
+    </style>
+
+</head>
+
+<header>
+    <a href="@Url.Action("AddtoCart", "Requisition")" style="float: right;">Proceed to Checkout</a>
+</header>
+
+@using (Html.BeginForm("Index", "Requisition", FormMethod.Get))
+{
+
+
+    <form>
+        Search Products:
+
+        @Html.TextBox("search", null, new { @class = "form-control" }) <br /> <button class="btn btn-primary">Search</button>
+    </form>
+
+}
+<br />
+<div id="tabledropdown">
+    <div class="row" style="margin-bottom:100px;">
+        @if (Model != null)
+        {
+            <table class="table">
+                <tr>
+                    <th> Category</th>
+                    <th> Description </th>
+                    <th> UOM </th>
+                    <th> Button </th>
+                    <th> Button </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UOM)
+                        </td>
+                        <td></td>
+
+                        <td align="center">
+                            <a href="@Url.Action("Index", "Requisition", new { id = item.ItemCode })">Add to Cart</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+        }
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable({
+            "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+    
+</script>

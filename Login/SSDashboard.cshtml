@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Store Manager Dashboard";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SS.cshtml";
+}
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/newst.css">
+   
+</head>
+
+
+<h2>Store Supervisor Dashboard</h2>
+<table class="container">
+
+    <tr>
+        <td>@Html.ActionLink("Purchase Order", "PlaceOrder", "PurchaseOrder")</td>
+        <td>@Html.ActionLink("Catalogue", "Index", "Products")</td>
+        <td><button class="btn" onclick="window.location.href = '/StockAdjustmentVoucherDetails/ApproverView?Role=Supervisor';">Pending Approval/Rejection</button></td>
+
+    </tr>
+    <tr>
+        <td>@Html.ActionLink("Manage Collection Point", "ViewCollectionPoint", "CollectionPoint")</td>
+        <td>@Html.ActionLink("Supplier List", "Index","Suppliers")</td>
+        <td>@Html.ActionLink("View Tender", "Tender")</td>
+    </tr>
+    <tr>
+        <td>@Html.ActionLink("Requisitions History", "ViewAllRequisition", "RequisitionApprovals")</td>
+        <td>@Html.ActionLink("View Department", "Department")</td>
+        <td>@Html.ActionLink("Charge Department", "ChargeBackDepartment", "ChargeBackDepartment")</td>
+    </tr>
+    <tr>
+        <td>@Html.ActionLink("Trend Analysis", "Index", "Trend")</td>
+        <td>@Html.ActionLink("Reorder Report", "Department", "")</td>
+        <td>@Html.ActionLink("Inventory Status Report", "ChargeBackDepartment", "ChargeBackDepartment")</td>
+        <td></td>
+    </tr>
+
+</table>

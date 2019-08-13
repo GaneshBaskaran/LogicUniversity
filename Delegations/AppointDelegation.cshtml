@@ -1,0 +1,106 @@
+﻿@model LogicUniversity.Models.Delegation
+
+@{
+    var delegation = (List<string>)ViewData["list"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_DH.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+</head>
+
+<h2>Appoint delegate</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @*<br /><br />*@
+    <div class="form-horizontal">
+        @*<h4 style="text-align:center">Appoint Delegation</h4>*@
+        @*<hr />*@
+        <div class="form-group">
+            @{ if (delegation != null)
+                {
+                    foreach (var item in delegation)
+                    {
+                        <p style="color:red">@item</p>                        
+                    }
+                }
+            }
+        </div>
+      
+        <table align="center">
+            <tr>
+                <td>@Html.Label("Select Employee")
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("From Date")</td>
+                <td>
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("To Date")</td>
+                <td>
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td><input type="reset" value="Reset" class="btn btn-primary" role="button"/></td>
+                <td><input type="submit" value="Appoint" class="btn btn-primary" role="button"/></td>
+            </tr>
+        </table>
+
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Select Employee")
+            <div class="col-md-10">
+                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.Label("From Date")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.Label("To Date")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group" align="center">
+            <div class="col-md-offset-2 col-md-10">*@
+      
+                @*<input type="reset" value="Reset" class="btn btn-default" align="center"/>        
+                <input type="submit" value="Appoint" class="btn btn-default"  />*@
+     
+            @*</div>
+        </div>*@
+    </div>
+}
+
+<div>
+    @Html.ActionLink("View list of delegates", "ViewDelegation")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

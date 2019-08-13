@@ -1,0 +1,52 @@
+﻿@using LogicUniversity.Models
+
+@{ var trList = (List<TempRetrieval>)ViewData["trList"];}
+
+@{
+    ViewBag.Title = "FilteredList";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SC.cshtml";
+}
+
+<html>
+
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<h2>FilteredList</h2>
+<body>
+    <table>
+        <tr>
+            <td>Stationery Description</td>
+            <td>Quantity Retrieved</td>
+            <td>Quantity in Inventory</td>
+            <td>Total Quantity</td>
+            <td>Department</td>
+            <td>Quantity by Department</td>
+        </tr>
+
+        @foreach (var tr in trList)
+        {
+            {
+                <tr>
+                    <td>@tr.StationeryDescription</td>
+                    <td><input type="text" /></td>
+                    <td>@tr.QuantityInInventory</td>
+                    <td></td>
+                    <td>@tr.Department</td>
+                    <td>@tr.QuantityRequested</td>
+                </tr>
+
+            }
+        }
+    </table>
+
+</body>
+</html>

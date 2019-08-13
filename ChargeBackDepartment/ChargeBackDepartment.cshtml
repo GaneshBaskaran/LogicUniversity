@@ -1,0 +1,84 @@
+﻿@using LogicUniversity.Models
+@model Department
+@{
+    ViewBag.Title = "ChargeDepartment";
+
+    var Department_List = (List<Department>)ViewData["DepartmentName"];
+    var months = (List<string>)ViewData["months"];
+    var deptname = (string)ViewData["deptName"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SM.cshtml";
+}
+
+<h2>Chargeback to Department</h2>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @*<title>Index</title>*@
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    <script type="text/javascript" src="@Url.Action("~/scripts/jquery-3.3.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Action("~/scripts/bootstrap.min.js")"></script>
+
+    <script>
+        function onChange_rep() {
+            var e = document.getElementById("itemId_rep");
+            console.log(e.options[e.selectedIndex].value);
+            var etochange = document.getElementById("Dept_Name");
+            etochange.value = e.options[e.selectedIndex].value;
+        };
+        function onChange_year() {
+            var e = document.getElementById("year");
+            console.log(e.options[e.selectedIndex].value);
+            var etochange = document.getElementById("yearselected");
+            etochange.value = e.options[e.selectedIndex].value;
+        };
+        function onChange_month() {
+            var e = document.getElementById("month");
+            console.log(e.options[e.selectedIndex].value);
+            var etochange = document.getElementById("monthselected");
+            etochange.value = e.options[e.selectedIndex].value;
+        };
+    </script>
+</head>
+
+<body>
+    @using (Html.BeginForm("ShowChargeBackDepartment", "ChargeBackDepartment", FormMethod.Post))
+    {
+        @*<br />*@
+        <table align="center">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.Label("Department")&nbsp;
+                        @Html.DropDownList("Select Representative", Department_List.Select(item => new SelectListItem { Text = item.DeptName, Value = item.DeptName, Selected = (item.DeptName == deptname) ? true : false }), new { id = "itemId_rep", onchange = "onChange_rep()" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.Label("Month")
+                        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+                        @Html.DropDownList("Year", Enumerable.Range(((DateTime.Now.Year) - 19), 20).Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString(), Selected = (x.ToString() == (DateTime.Now.Year).ToString()) ? true : false }), new { id = "year", onChange = "onChange_year()" })
+                        @Html.DropDownList("Month", months.Select(x => new SelectListItem { Text = x, Value = x, Selected = (x == months[DateTime.Now.Month - 1]) ? true : false }), new { id = "month", onChange = "onChange_month()" })
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <input type="hidden" id="Dept_Name" name="Dept_Name" />
+            <input type="hidden" id="yearselected" name="yearselected" />
+            <input type="hidden" id="monthselected" name="monthselected" />
+            <input type="submit" value="Charge-back" class="btn btn-primary" role="button" />
+        </div>
+    }
+</body>
+</html>
+
+
+
+
+

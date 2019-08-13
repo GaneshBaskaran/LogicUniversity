@@ -1,0 +1,83 @@
+﻿@model IEnumerable<LogicUniversity.Models.StockAdjustmentVoucherDetail>
+@using LogicUniversity.Models
+
+@{
+    ViewBag.Title = "ApprovalAction";
+    var DetailList = (List<StockAdjustmentVoucherDetail>)ViewData["DetailList"];
+    var TotalAmount = (double)ViewData["TotalAmount"];
+    var ItemCodeString = (string)ViewData["ItemCodeString"];
+    var Role = (string)ViewData["Role"];
+}
+@{
+    Layout = "~/Views/Shared/_Layout_SM.cshtml";
+}
+
+
+<h2>ApprovalAction</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StockAdjustmentVoucherId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityAdjusted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+        </tr>
+
+        @{
+            //To make unique Id
+            int i = 0;
+            foreach (var item in DetailList)
+            {
+                <tr>
+                    <td>
+                        <text Id="StockAdjustmentVoucherDetails[@i].StockAdjustmentVoucherId" name="StockAdjustmentVoucherDetails[@i].StockAdjustmentVoucherId" typeof="text">@item.StockAdjustmentVoucherId</text>
+                        @*@Html.DisplayFor(modelItem => item.StockAdjustmentVoucherId)*@
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantityAdjusted)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                </tr>
+                i++;
+            }
+
+        }
+        <tr>Total Cost:$@TotalAmount</tr>
+
+    </table>
+    <div class="form-group">
+        <input type="hidden" name="Role" id="Role" value=@Role />
+        <input type="hidden" name="ItemCodeString" id="ItemCodeString" value=@ItemCodeString />
+        <input type="text" name="ApproverRemarks" id="ApproverRemarks" />
+        <input type="submit" name="Approve" value="Approve" />
+        <input type="submit" name="Reject" value="Reject" />
+
+        @*<input type="submit" value="Create" class="btn btn-default" />*@
+    </div>
+}

@@ -1,0 +1,121 @@
+﻿
+@model IEnumerable<LogicUniversity.Models.DisbursementDetail>
+
+@{
+    Layout = "~/Views/Shared/_Layout_SM.cshtml";
+}
+
+@{
+    ViewBag.Title = "ChargeDepartment";
+
+    var deptname=(string)ViewData["dept"];
+    var year = (string)ViewData["year"];
+    var month = (string)ViewData["month"];
+    var Department_List = (List<string>)ViewData["DepartmentName"];
+    var months = (List<string>)ViewData["months"];
+}
+
+<h2>Department Chargeback</h2>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @*<title>Index</title>*@
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    <link rel="stylesheet" type="text/css" href="~/css/basic.css">
+    <script type="text/javascript" src="@Url.Action("~/scripts/jquery-3.3.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Action("~/scripts/bootstrap.min.js")"></script>
+    <script>
+        function onChange_rep() {
+            var e = document.getElementById("itemId_rep");
+            console.log(e.options[e.selectedIndex].value);
+            var etochange = document.getElementById("Dept_Name");
+            etochange.value = e.options[e.selectedIndex].value;
+        };
+        function onChange_year() {
+            var e = document.getElementById("year");
+            console.log(e.options[e.selectedIndex].value);
+            var etochange = document.getElementById("yearselected");
+            etochange.value = e.options[e.selectedIndex].value;
+        };
+        function onChange_month() {
+            var e = document.getElementById("month");
+            console.log(e.options[e.selectedIndex].value);
+            var etochange = document.getElementById("monthselected");
+            etochange.value = e.options[e.selectedIndex].value;
+        };
+
+    </script>
+</head>
+@*<br />*@
+<body>
+    @using (Html.BeginForm("ShowChargeBackDepartment", "ChargeBackDepartment", FormMethod.Post))
+    {
+        <table align="center">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.Label("Department")&nbsp;
+                        @Html.DropDownList("Department List", Department_List.Select(item => new SelectListItem { Text = item, Value = item, Selected = (item == Department_List[0]) ? true : false }), new { id = "itemId_rep", onchange = "onChange_rep()" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.Label("Month") &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+                        @Html.DropDownList("Year", Enumerable.Range(((DateTime.Now.Year) - 19), 20).Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString(), Selected = (x.ToString() == (DateTime.Now.Year).ToString()) ? true : false }), new { id = "year", onChange = "onChange_year()" })
+                        @Html.DropDownList("Month", months.Select(x => new SelectListItem { Text = x, Value = x, Selected = (x == months[DateTime.Now.Month - 1]) ? true : false }), new { id = "month", onChange = "onChange_month()" })
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+        <div class="form-group">
+            <input type="hidden" id="Dept_Name" name="Dept_Name" />
+            <input type="hidden" id="yearselected" name="yearselected" />
+            <input type="hidden" id="monthselected" name="monthselected" />
+            <input type="submit" value="Charge-back" class="btn btn-primary" role="button"/>
+        </div>
+    }
+    @*<div class="container-fluid py-4">*@
+
+    @*</div>*@
+    <div class="container-fluid py-4">
+        @*<h4 class="text-center text-uppercase">Chargeback</h4>*@
+        <table align="center" class="table table-striped table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Catalogue Item Code</th>
+                    <th>Stationary Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{var total = 0.0; }
+                @foreach (var item in Model)
+                {
+                    var result = item.QuantityReceived * item.Products.UnitPrice;
+                    <tr>
+                        <td>@item.Products.ItemCode</td>
+                        <td>@item.Products.Description</td>
+                        <td id="box1">@item.QuantityReceived</td>
+                        <td id="box2">@item.Products.UnitPrice</td>
+                        <td id="result">@result  </td>
+                    </tr>
+                    total += result;
+                }
+                <tr>
+                    <th colspan="4">Total</th>
+                    <th>@total</th>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+   
+
+</body>
+</html>
